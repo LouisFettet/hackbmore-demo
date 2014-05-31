@@ -1,0 +1,137 @@
+<html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="/js/form.js"></script>
+	</head>
+	<body>
+		<a href="/">View All Projects</a>
+		<div id="demo"></div>
+		<form class="formView socrataForm commonForm" method="POST" 
+					onsubmit="cleanAndSend();"
+					enctype="multipart/form-data"
+					data-defaultSuccessRedirect="/"
+					action="https://louis.demo.socrata.com/views/f2tk-zqyd/rows.html?method=createForm&successRedirect=https%3A%2F%2Flouis.demo.socrata.com%2Fdataset%2FCommunity-Exchange-Submission%2Ff2tk-zqyd%2Fform_success&errorRedirect=https%3A%2F%2Flouis.demo.socrata.com%2Fdataset%2FCommunity-Exchange-Submission%2Ff2tk-zqyd%2Fform_error">
+      <div class="line clearfix text">
+        <label for="form_field_uid" title="UID">UID</label>
+        <input type="text" class="fieldInput" id="form_field_uid" name="uid" />
+      </div>
+
+      <div class="line clearfix text">
+        <label for="form_field_project_title" title="Project Title">Project Title</label>
+        <input type="text" class="fieldInput" id="form_field_project_title" name="project_title" required="true"/>
+      </div>
+
+      <div class="line clearfix text">
+        <label for="form_field_project_description" title="Project Description">Project Description</label>
+        <input type="text" class="fieldInput" id="form_field_project_description" name="project_description" required="true"/>
+      </div>
+
+      <div class="line clearfix text">
+        <label for="form_field_name" title="Name">Name</label>
+        <input type="text" class="fieldInput" id="form_field_name" name="name" required="true"/>
+      </div>
+
+      <div class="line clearfix email">
+        <label for="form_field_email" title="Email">Email</label>
+        <input type="text" class="fieldInput" id="form_field_email" name="email" />
+      </div>
+
+      <div class="line clearfix phone">
+        <label for="form_field_phone" title="Phone">Phone</label>
+        <div class="fieldContainer phoneInput">
+					<input type="text" id="form_field_phone" name="phone:phone_number" />
+					<select id="form_field_phone_phone_type" name="phone:phone_type">
+						<option value="">(Blank)</option>
+						<option value="Home">Home</option>
+						<option value="Cell">Cell</option>
+						<option value="Work">Work</option>
+						<option value="Fax">Fax</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
+
+
+      </div>
+      <div class="line clearfix photo">
+        <label for="form_field_image" title="Image">Image</label>
+        <input type="file" id="form_field_image" name="image" required="true"/>
+      </div>
+
+      <div class="line clearfix text">
+        <label for="form_field_location_name" title="Location Name">Location Name</label>
+        <input type="text" class="fieldInput" id="form_field_location_name" name="location_name" required="true"/>
+      </div>
+
+      <div class="line clearfix text">
+        <label for="form_field_location_description" title="Location Description">Location Description</label>
+        <input type="text" class="fieldInput" id="form_field_location_description" name="location_description" required="true"/>
+      </div>
+
+      <div class="line clearfix location">
+        <label for="form_field_location" title="Location">Location</label>
+        <div class="fieldContainer locationInput">
+					<label for="form_field_location_address_street">Street</label>
+					<input type="text" id="form_field_location_address_street"
+								 name="location:human_address:address" />
+					<label for="form_field_location_address_city">City</label>
+					<input type="text" id="form_field_location_address_city"
+								 name="location:human_address:city" />
+					<label for="form_field_location_address_state">State</label>
+					<input type="text" id="form_field_location_address_state"
+								 name="location:human_address:state" />
+					<label for="form_field_location_address_zip">Zip</label>
+					<input type="text" id="form_field_location_address_zip"
+								 name="location:human_address:zip" />
+				</div>
+      </div>
+
+      <div class="line clearfix calendar_date">
+        <label for="form_field_timestamp" title="Timestamp">Timestamp</label>
+        <div class="fieldContainer dateInput">
+					<select class="monthInput" name="timestamp:month">
+						<option value=""></option>
+						<option value="1">Jan</option>
+						<option value="2">Feb</option>
+						<option value="3">Mar</option>
+						<option value="4">Apr</option>
+						<option value="5">May</option>
+						<option value="6">Jun</option>
+						<option value="7">Jul</option>
+						<option value="8">Aug</option>
+						<option value="9">Sep</option>
+						<option value="10">Oct</option>
+						<option value="11">Nov</option>
+						<option value="12">Dec</option>
+					</select>
+					<input type="text" class="dayInput" maxlength="2" min="1" max="31"
+								 name="timestamp:day" />
+					<input type="text" class="yearInput" maxlength="4" name="timestamp:year" />
+					<input type="text" class="hourInput" maxlength="2" min="1" max="12"
+								 name="timestamp:hour" />
+					<span class="hourSplit">:</span>
+					<input type="text" class="minuteInput" maxlength="2" min="0" max="59"
+								 name="timestamp:minute" />
+					<select class="ampmInput" name="timestamp:pm">
+						<option value="am">AM</option>
+						<option value="pm">PM</option>
+					</select>
+				</div>
+      </div>
+
+			<div class="submitLine">
+				<input type="submit" value="Submit" />
+			</div>
+			<a href="http://www.socrata.com/" class="poweredLink"
+				 target="_blank">Powered by Socrata</a>
+		</form>
+
+	</body>
+</html>

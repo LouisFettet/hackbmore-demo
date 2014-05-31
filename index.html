@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+		<script>
+		 $(function() {
+			 var mapbox = L.mapbox.map('map', 'lf-socrata.id1an8el');
+
+			 var url = "https://louis.demo.socrata.com/resource/u7bn-div8.json";
+			 $.getJSON(url, function(data) {
+				 markers = new L.mapbox.featureLayer;
+				 $.each(data, function(i, row) {
+					 if (row.location) {
+						 var lng = row.location.longitude;
+						 var lat = row.location.latitude;
+						 if (lng != null && lat != null) {
+							 var marker = L.marker([lat,lng]);
+							 markers.addLayer(marker);
+						 }
+					 }
+					 var record = "<div class='record'>" +
+												"<div class='text-section'>" +
+												"<h3>Project: " + row.project_title + "</h3>" +
+												"<p>Description: " + row.project_description + "</p>" +
+												"<p>Submitted By: " + row.name + "</p>";
+					 if (typeof(row.phone) !== "undefined") {
+						 record += "<p>Contact Info: <p>Phone: <a href='tel:" +row.phone.phone_number +"'>" + row.phone.phone_number + "</a></p><p>Email: <a href='mailto:"+row.email+"'>" + row.email + "</a></p>"; 
+					 }
+					 record += "</div>";
+					 if (typeof(row.image) !== "undefined") {
+						 record += "<div class='image-container'><img src='https://louis.demo.socrata.com/views/u7bn-div8/files/"+row.image+"'/></div>";
+					 }
+					 record += "</div>";
+
+					 $(".feed").append(record);
+				 })
+				 markers.addTo(mapbox);
+			 });
+		 });
+		</script>
+		<link rel="stylesheet" href="/css/styles.css">
+	</head>
+	<body>
+		<div id="app">
+			<div id="head">
+				<h1>Baltimore Community Exchange</h1>
+				<a href="/submit">Submit a Project!</a>
+			</div>
+			<div class="feed"></div>
+		</div>
+		<div id="map"></div>
+	</body>
+</html>
